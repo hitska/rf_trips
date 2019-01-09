@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        rf-trips
 // @description Добавляет поле трипкода в /rf/ мэйлача
-// @version     1.4
+// @version     1.4.1
 // @include     *2ch.*/rf/*
 // @grant       GM.setValue
 // @grant       GM.getValue
@@ -10,7 +10,10 @@
 // ==/UserScript==
 
 (function (window, undefined) {
-	$('#e-mail').after('<input type="text" value="" id="name" class="postform__input postform__input_type_m input" size="10" name="name" placeholder="трипкод">');
+	// Проверка на пустой объект: если поле трипкода уже есть, не добавляем второй раз.
+	if ( JSON.stringify($('#name')) == "{}" ) {
+		$('#e-mail').after('<input type="text" value="" id="name" class="postform__input postform__input_type_m input" size="10" name="name" placeholder="трипкод">');
+	}
 
 	var tripcode_key = 'rf_tripcode';
 	
